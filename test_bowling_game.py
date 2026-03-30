@@ -47,3 +47,24 @@ def test_example_game():
     game = BowlingGame()
     roll_many(game, rolls)
     assert game.score() == 190
+
+
+def test_two_consecutive_strikes():
+    game = BowlingGame()
+    rolls = [10, 10, 4, 2] + [0]*14
+    roll_many(game, rolls)
+    assert game.score() == 46
+
+
+def test_spare_followed_by_strike():
+    game = BowlingGame()
+    rolls = [5, 5, 10, 3, 4] + [0]*15
+    roll_many(game, rolls)
+    assert game.score() == 44
+
+
+def test_last_frame_spare_bonus():
+    game = BowlingGame()
+    rolls = [0]*18 + [7, 3, 5]
+    roll_many(game, rolls)
+    assert game.score() == 15
